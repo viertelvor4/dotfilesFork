@@ -39,6 +39,7 @@ apt_packages+=(
   nnn
   ranger
   zsh
+  tmuxinator
 )
 
 apt_packages+=(vim)
