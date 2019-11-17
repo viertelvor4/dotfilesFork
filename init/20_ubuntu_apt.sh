@@ -38,6 +38,7 @@ apt_packages+=(
   tree
   nnn
   ranger
+  zsh
 )
 
 apt_packages+=(vim)
