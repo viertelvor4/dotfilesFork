@@ -39,6 +39,7 @@ apt_packages+=(
   nnn
   ranger
   zsh
+  tmux
   tmuxinator
 )
 
@@ -48,9 +49,6 @@ is_ubuntu_desktop && apt_packages+=(vim-gnome)
 # https://github.com/neovim/neovim/wiki/Installing-Neovim
 add_ppa ppa:neovim-ppa/stable
 apt_packages+=(neovim)
-
-# https://launchpad.net/~hnakamur/+archive/ubuntu/tmux
-add_ppa ppa:hnakamur/tmux
 
 # https://github.com/greymd/tmux-xpanes
 add_ppa ppa:greymd/tmux-xpanes
