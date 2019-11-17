@@ -4,7 +4,7 @@ export TERM="xterm-256color"
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/althof/.oh-my-zsh"
+export ZSH="/home/vagrant/.oh-my-zsh"
 
 # VIM as default editor
 export EDITOR='vim'
