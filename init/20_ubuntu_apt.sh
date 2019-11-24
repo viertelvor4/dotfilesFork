@@ -62,6 +62,11 @@ if is_ubuntu_desktop; then
   # apt_source_texts+=("deb http://download.opensuse.org/repositories/home:/Horst3180/xUbuntu_16.04/ /")
   # apt_packages+=(arc-theme)
 
+  # https://itsfoss.com/pop-icon-gtk-theme-ubuntu/
+  add_ppa ppa:system76/pop
+  apt_packages+=(pop-theme)
+  apt_packages+=(pop-icon-theme)
+  
   # https://www.ubuntuupdates.org/ppa/google_chrome
   apt_keys+=(https://dl-ssl.google.com/linux/linux_signing_key.pub)
   apt_source_files+=(google-chrome)
