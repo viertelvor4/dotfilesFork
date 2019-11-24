@@ -121,7 +121,7 @@ if is_ubuntu_desktop; then
   # https://www.dropbox.com/install-linux
   apt_packages+=(python-gtk2)
   deb_installed+=(/usr/bin/dropbox)
-  deb_sources+=("https://www.dropbox.com/download?plat=lnx.x86_64")
+  deb_sources+=(""https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2019.02.14_amd64.deb)
 
   # http://askubuntu.com/a/852727
   apt_packages+=(cabextract)
