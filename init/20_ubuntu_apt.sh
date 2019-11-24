@@ -41,6 +41,7 @@ apt_packages+=(
   zsh
   tmux
   tmuxinator
+  fonts-powerline
 )
 
 apt_packages+=(vim)
@@ -76,17 +77,8 @@ if is_ubuntu_desktop; then
   # https://tecadmin.net/install-oracle-virtualbox-on-ubuntu/
   apt_keys+=(https://www.virtualbox.org/download/oracle_vbox_2016.asc)
   apt_source_files+=(virtualbox)
-  apt_source_texts+=("deb http://download.virtualbox.org/virtualbox/debian $release_name contrib")
-  apt_packages+=(virtualbox-5.1)
-
-  # https://github.com/colinkeenan/silentcast/#ubuntu
-  # https://github.com/colinkeenan/silentcast/#ubuntu-linux-full-install
-  add_ppa ppa:sethj/silentcast
-  add_ppa ppa:webupd8team/y-ppa-manager
-  apt_packages+=(
-    libav-tools x11-xserver-utils xdotool wininfo wmctrl python-gobject python-cairo xdg-utils yad
-    silentcast
-  )
+  apt_source_texts+=("deb [arch=amd64] http://download.virtualbox.org/virtualbox/debian $(lsb_release -cs) contrib")
+  apt_packages+=(virtualbox-6.0)
 
   # Misc
   apt_packages+=(adb fastboot)
@@ -99,7 +91,6 @@ if is_ubuntu_desktop; then
     network-manager-openconnect
     network-manager-openconnect-gnome
     openssh-server
-    shutter
     unity-tweak-tool
     vlc
     xclip
@@ -118,19 +109,14 @@ if is_ubuntu_desktop; then
   #   sudo sed -i'' "s/Specification.all = nil/Specification.reset/" /usr/lib/ruby/vendor_ruby/vagrant/bundler.rb
   # }
 
-  # https://be5invis.github.io/Iosevka/
-  # https://launchpad.net/~laurent-boulard/+archive/ubuntu/fonts
-  add_ppa ppa:laurent-boulard/fonts
-  apt_packages+=(fonts-iosevka)
-
   # https://launchpad.net/grub-customizer
   add_ppa ppa:danielrichter2007/grub-customizer
   apt_packages+=(grub-customizer)
 
   # https://www.dropbox.com/install-linux
-  apt_packages+=(python-gtk2 python-gpgme)
+  apt_packages+=(python-gtk2)
   deb_installed+=(/usr/bin/dropbox)
-  deb_sources+=("https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2015.10.28_amd64.deb")
+  deb_sources+=("https://www.dropbox.com/download?plat=lnx.x86_64")
 
   # http://askubuntu.com/a/852727
   apt_packages+=(cabextract)
@@ -142,8 +128,8 @@ if is_ubuntu_desktop; then
   }
 
   # https://slack.com/downloads/instructions/linux
-  deb_installed+=(/usr/bin/slack)
-  deb_sources+=(https://downloads.slack-edge.com/linux_releases/slack-desktop-2.5.2-amd64.deb)
+  # deb_installed+=(/usr/bin/slack)
+  # deb_sources+=(https://downloads.slack-edge.com/linux_releases/slack-desktop-2.5.2-amd64.deb)
 
 fi
 
@@ -156,7 +142,13 @@ function other_stuff() {
       sudo make install
     )
   fi
-  # Install misc bins from zip file.
+  # Install slack
+  if [[ ! -d "/usr/bin/slack"]]; then
+    e_header "Installing Slack"
+    (
+      sudo snap install slack --classic
+    )
+  fi
 }
 
 ####################
