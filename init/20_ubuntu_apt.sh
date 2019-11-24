@@ -150,9 +150,7 @@ function other_stuff() {
   # Install slack
   if [[ ! -d "/usr/bin/slack"]]; then
     e_header "Installing Slack"
-    (
-      sudo snap install slack --classic
-    )
+    sudo snap install slack --classic
   fi
 }
 
