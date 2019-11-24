@@ -33,6 +33,7 @@ apt_packages+=(
   mercurial
   nmap
   postgresql
+  mysql-server
   python-pip
   silversearcher-ag
   tree
@@ -42,6 +43,8 @@ apt_packages+=(
   tmux
   tmuxinator
   fonts-powerline
+  gulp
+  sass
 )
 
 apt_packages+=(vim)
@@ -119,9 +122,9 @@ if is_ubuntu_desktop; then
   apt_packages+=(grub-customizer)
 
   # https://www.dropbox.com/install-linux
-  apt_packages+=(python-gtk2)
-  deb_installed+=(/usr/bin/dropbox)
-  deb_sources+=(""https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2019.02.14_amd64.deb)
+  # apt_packages+=(python-gtk2 libpango-1.0-0)
+  # deb_installed+=(/usr/bin/dropbox)
+  # deb_sources+=("https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2019.02.14_amd64.deb")
 
   # http://askubuntu.com/a/852727
   apt_packages+=(cabextract)
@@ -132,10 +135,34 @@ if is_ubuntu_desktop; then
     echo http://ftp.debian.org/debian/pool/contrib/m/msttcorefonts/ttf-mscorefonts-installer_3.6_all.deb
   }
 
+  # various apps
+
+  # Install slack
+  if [[ ! -d "/usr/bin/slack" ]]; then
+    e_header "Installing Slack"
+    sudo snap install slack --classic
+  fi
+
+  # Install Dropbox
+  # Führen Sie den Dropbox-Daemon danach von dem neuen .dropbox-dist -Ordner aus aus.
+  # ~/.dropbox-dist/dropboxd
+  if [[ ! -d "$HOME/.dropbox-dist" ]]; then
+    e_header "Installing Dropbox"
+    cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
+  fi
+  
   # https://slack.com/downloads/instructions/linux
   # deb_installed+=(/usr/bin/slack)
   # deb_sources+=(https://downloads.slack-edge.com/linux_releases/slack-desktop-2.5.2-amd64.deb)
 
+  # Jetbrains Toolbox
+  # cd into the toolbox dir and start toolbox with ./jetbrains-toolbox
+  if [[ ! -d "/opt/jetbrains/toolbox" ]]; then
+    e_header "Installing Jetbrains Toolbox"
+    sudo mkdir -p /opt/jetbrains/toolbox &&
+    cd /opt/jetbrains/toolbox &&
+    wget -O - "https://download.jetbrains.com/toolbox/jetbrains-toolbox-1.16.6067.tar.gz" | sudo tar xzf - 
+  fi
 fi
 
 function other_stuff() {
@@ -146,11 +173,6 @@ function other_stuff() {
       cd $DOTFILES/vendor/git-extras &&
       sudo make install
     )
-  fi
-  # Install slack
-  if [[ ! -d "/usr/bin/slack" ]]; then
-    e_header "Installing Slack"
-    sudo snap install slack --classic
   fi
 }
 
