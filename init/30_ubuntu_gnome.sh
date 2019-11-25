@@ -1,5 +1,3 @@
-#!/usr/bin/env bash
-
 # GNOME extension to move bar to bottom
 sudo apt install -y gnome-tweaks chrome-gnome-shell
 git clone https://github.com/home-sweet-gnome/dash-to-panel.git panel
