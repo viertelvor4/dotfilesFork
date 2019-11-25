@@ -77,10 +77,10 @@ if is_ubuntu_desktop; then
   apt_packages+=(google-chrome-stable)
 
   # https://www.spotify.com/us/download/linux/
-  apt_keys+=('--keyserver hkp://keyserver.ubuntu.com:80 --recv-keys BBEBDCB318AD50EC6865090613B00F1FD2C19886')
-  apt_source_files+=(spotify)
-  apt_source_texts+=("deb http://repository.spotify.com stable non-free")
-  apt_packages+=(spotify-client)
+  # apt_keys+=('--keyserver hkp://keyserver.ubuntu.com:80 --recv-keys BBEBDCB318AD50EC6865090613B00F1FD2C19886')
+  # apt_source_files+=(spotify)
+  # apt_source_texts+=("deb http://repository.spotify.com stable non-free")
+  # apt_packages+=(spotify-client)
 
   # https://tecadmin.net/install-oracle-virtualbox-on-ubuntu/
   apt_keys+=(https://www.virtualbox.org/download/oracle_vbox_2016.asc)
@@ -89,7 +89,6 @@ if is_ubuntu_desktop; then
   apt_packages+=(virtualbox-6.0)
 
   # Misc
-  apt_packages+=(adb fastboot)
   apt_packages+=(
     chromium-browser
     fonts-mplus
@@ -100,9 +99,10 @@ if is_ubuntu_desktop; then
     network-manager-openconnect-gnome
     openssh-server
     unity-tweak-tool
-    vlc
     xclip
     zenmap
+    keepassxc
+    tilix
   )
 
   # Manage online accounts via "gnome-control-center" in launcher
@@ -121,6 +121,10 @@ if is_ubuntu_desktop; then
   add_ppa ppa:danielrichter2007/grub-customizer
   apt_packages+=(grub-customizer)
 
+  # https://kifarunix.com/how-to-install-and-use-veracrypt-to-encrypt-drives-on-ubuntu-18-04/
+  add_ppa ppa:unit193/encryption
+  apt_packages+=(veracrypt)
+
   # https://www.dropbox.com/install-linux
   # apt_packages+=(python-gtk2 libpango-1.0-0)
   # deb_installed+=(/usr/bin/dropbox)
@@ -135,12 +139,20 @@ if is_ubuntu_desktop; then
     echo http://ftp.debian.org/debian/pool/contrib/m/msttcorefonts/ttf-mscorefonts-installer_3.6_all.deb
   }
 
-  # various apps
-
+  ################
+  # various apps #
+  ################
+  
   # Install slack
   if [[ ! -d "/usr/bin/slack" ]]; then
     e_header "Installing Slack"
     sudo snap install slack --classic
+  fi
+  
+  # Install Spotify
+  if [[ ! -d "$HOME/snap/spotify" ]]; then
+    e_header "Installing Spotify"
+    sudo snap install spotify
   fi
 
   # Install Dropbox
@@ -162,6 +174,15 @@ if is_ubuntu_desktop; then
     sudo mkdir -p /opt/jetbrains/toolbox &&
     cd /opt/jetbrains/toolbox &&
     wget -O - "https://download.jetbrains.com/toolbox/jetbrains-toolbox-1.16.6067.tar.gz" | sudo tar xzf - 
+  fi
+  
+  # Franz Messanger
+  # cd into the dir and start Franz with ./Franz
+  if [[ ! -d "/opt/franz" ]]; then
+    e_header "Installing Franz Messanger"
+    sudo mkdir -p /opt/franz &&
+    cd /opt/franz &&
+    wget -O - "https://github.com/meetfranz/franz/releases/download/v5.4.0/franz_5.4.0_amd64.deb" | sudo tar xzf - 
   fi
 fi
 
