@@ -88,7 +88,7 @@ if is_ubuntu_desktop; then
   # https://github.com/vinceliuice/vimix-gtk-themes
   git clone https://github.com/vinceliuice/vimix-gtk-themes.git $installers_path/Vimix-themes
   cd $installers_path/Vimix-themes
-  ./install
+  ./Install
   cd ..
   rm -rf Vimix-themes
 
