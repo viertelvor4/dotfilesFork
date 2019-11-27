@@ -97,6 +97,8 @@ if is_ubuntu_desktop; then
     chromium-browser
     fonts-mplus
     gnome-tweak-tool
+    gnome-tweaks
+    chrome-gnome-shell
     rofi
     network-manager-openconnect
     network-manager-openconnect-gnome
@@ -194,6 +196,14 @@ function other_stuff() {
       sudo make install
     )
   fi
+  
+  # Install Dash-To-Panel
+  e_header "Installing Dash-to-Panel"
+  git clone https://github.com/home-sweet-gnome/dash-to-panel.git $DOTFILES/caches/installer/panel
+  cd $DOTFILES/caches/installer/panel && make install
+  cd ..
+  rm -rf panel
+  gnome-shell-extension-tool -e dash-to-panel
 }
 
 ####################
