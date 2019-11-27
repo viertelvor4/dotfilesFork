@@ -78,9 +78,26 @@ if is_ubuntu_desktop; then
   add_ppa ppa:tista/adapta
   apt_packages+=(adapta-gtk-theme)
 
-  # https://itsfoss.com/install-paper-theme-linux/
-  add_ppa ppa:ppa:snwh/pulp
-  apt_packages+=(paper-gtk-theme paper-icon-theme)
+  # https://www.omgubuntu.co.uk/2019/06/install-qogir-theme-ubuntu
+  git clone git@github.com:vinceliuice/Qogir-theme.git $installers_path/Qogir-theme
+  cd $installers_path/Qogir-theme
+  ./install.sh
+  cd ..
+  rm -rf Qogir-theme
+
+  # https://github.com/vinceliuice/vimix-gtk-themes
+  git clone git@github.com:vinceliuice/vimix-gtk-themes.git $installers_path/Vimix-themes
+  cd $installers_path/Vimix-themes
+  ./install.sh
+  cd ..
+  rm -rf Vimix-themes
+
+  # https://github.com/vinceliuice/vimix-icon-theme
+  git clone git@github.com:vinceliuice/vimix-icon-theme.git $installers_path/Vimix-icon-themes
+  cd $installers_path/Vimix-icon-themes
+  ./install.sh
+  cd ..
+  rm -rf Vimix-icon-themes
 
   # https://www.ubuntuupdates.org/ppa/google_chrome
   apt_keys+=(https://dl-ssl.google.com/linux/linux_signing_key.pub)
@@ -207,8 +224,8 @@ function other_stuff() {
   
   # Install Dash-To-Panel
   e_header "Installing Dash-to-Panel"
-  git clone https://github.com/home-sweet-gnome/dash-to-panel.git $DOTFILES/caches/installer/panel
-  cd $DOTFILES/caches/installer/panel && make install
+  git clone https://github.com/home-sweet-gnome/dash-to-panel.git $DOTFILES/caches/installers/panel
+  cd $DOTFILES/caches/installers/panel && make install
   cd ..
   rm -rf panel
   gnome-shell-extension-tool -e dash-to-panel
