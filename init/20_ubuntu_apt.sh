@@ -96,7 +96,7 @@ if is_ubuntu_desktop; then
   apt_packages+=(
     chromium-browser
     fonts-mplus
-    gbuildessentialnome-tweak-tool
+    gnome-tweak-tool
     rofi
     network-manager-openconnect
     network-manager-openconnect-gnome
@@ -166,10 +166,6 @@ if is_ubuntu_desktop; then
     cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
   fi
   
-  # https://slack.com/downloads/instructions/linux
-  # deb_installed+=(/usr/bin/slack)
-  # deb_sources+=(https://downloads.slack-edge.com/linux_releases/slack-desktop-2.5.2-amd64.deb)
-
   # Jetbrains Toolbox
   # cd into the toolbox dir and start toolbox with ./jetbrains-toolbox
   if [[ ! -d "/opt/jetbrains/toolbox" ]]; then
