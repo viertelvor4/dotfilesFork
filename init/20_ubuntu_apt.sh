@@ -25,12 +25,10 @@ function add_ppa() {
 
 # Misc.
 apt_packages+=(
-  build-essential
   curl
   git-core
   htop
   jq
-  mercurial
   nmap
   postgresql
   mysql-server
@@ -45,6 +43,8 @@ apt_packages+=(
   fonts-powerline
   gulp
   sass
+  firefox 
+  language-pack-de-base
 )
 
 apt_packages+=(vim)
@@ -65,6 +65,10 @@ if is_ubuntu_desktop; then
   # apt_source_texts+=("deb http://download.opensuse.org/repositories/home:/Horst3180/xUbuntu_16.04/ /")
   # apt_packages+=(arc-theme)
 
+  # https://itsfoss.com/install-numix-ubuntu/
+  add_ppa ppa:numix/ppa
+  apt_packages+=(numix-gtk-theme numix-icon-theme-circle numix-icon-theme-square)
+  
   # https://itsfoss.com/pop-icon-gtk-theme-ubuntu/
   add_ppa ppa:system76/pop
   apt_packages+=(pop-theme)
@@ -92,8 +96,7 @@ if is_ubuntu_desktop; then
   apt_packages+=(
     chromium-browser
     fonts-mplus
-    gnome-tweak-tool
-    k4dirstat
+    gbuildessentialnome-tweak-tool
     rofi
     network-manager-openconnect
     network-manager-openconnect-gnome
@@ -110,12 +113,12 @@ if is_ubuntu_desktop; then
 
   # https://github.com/mitchellh/vagrant/issues/7411
   deb_installed+=(/usr/bin/vagrant)
-  # deb_sources+=(https://releases.hashicorp.com/vagrant/1.9.2/vagrant_1.9.2_x86_64.deb)
+  deb_sources+=(https://releases.hashicorp.com/vagrant/2.2.6/vagrant_2.2.6_x86_64.deb)
   # https://github.com/vagrant-libvirt/vagrant-libvirt/issues/575
-  # apt_packages+=(vagrant)
-  # function postinstall_vagrant() {
-  #   sudo sed -i'' "s/Specification.all = nil/Specification.reset/" /usr/lib/ruby/vendor_ruby/vagrant/bundler.rb
-  # }
+  apt_packages+=(vagrant)
+  function postinstall_vagrant() {
+    sudo sed -i'' "s/Specification.all = nil/Specification.reset/" /usr/lib/ruby/vendor_ruby/vagrant/bundler.rb
+  }
 
   # https://launchpad.net/grub-customizer
   add_ppa ppa:danielrichter2007/grub-customizer
