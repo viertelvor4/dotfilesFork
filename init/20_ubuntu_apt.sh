@@ -74,6 +74,14 @@ if is_ubuntu_desktop; then
   apt_packages+=(pop-theme)
   apt_packages+=(pop-icon-theme)
   
+  # https://www.omgubuntu.co.uk/2016/10/install-adapta-gtk-theme-on-ubuntu
+  add_ppa ppa:tista/adapta
+  apt_packages+=(adapta-gtk-theme)
+
+  # https://itsfoss.com/install-paper-theme-linux/
+  add_ppa ppa:ppa:snwh/pulp
+  apt_packages+=(paper-gtk-theme paper-icon-theme)
+
   # https://www.ubuntuupdates.org/ppa/google_chrome
   apt_keys+=(https://dl-ssl.google.com/linux/linux_signing_key.pub)
   apt_source_files+=(google-chrome)
