@@ -242,18 +242,20 @@ if is_ubuntu_desktop; then
     e_header "Installing Franz Messanger"
     sudo mkdir -p /opt/franz &&
     cd /opt/franz &&
-    wget -O - "https://github.com/meetfranz/franz/releases/download/v5.4.0/franz_5.4.0_amd64.deb" | sudo tar xzf - 
+    wget -O - "https://github.com/meetfranz/franz/releases/download/v5.4.0/franz_5.4.0_amd64.deb" 
   fi
 fi
 
 function other_stuff() {
   # Install Dash-To-Panel
-  e_header "Installing Dash-to-Panel"
-  git clone https://github.com/home-sweet-gnome/dash-to-panel.git $DOTFILES/caches/installers/panel
-  cd $DOTFILES/caches/installers/panel && make install
-  cd ..
-  rm -rf panel
-  gnome-shell-extension-tool -e dash-to-panel
+  if [[ ! -d "$installers_path/dash-to-panel" ]]; then
+    e_header "Installing Dash-to-Panel"
+    git clone https://github.com/home-sweet-gnome/dash-to-panel.git $installers_path/dash-to-panel
+    cd $installers_path/dash-to-panel && make install
+    # cd ..
+    # rm -rf dash-to-panel
+    gnome-shell-extension-tool -e dash-to-panel
+  fi
 }
 
 ####################
