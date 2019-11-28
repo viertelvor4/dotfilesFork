@@ -76,6 +76,7 @@ HIST_STAMPS="mm/dd/yyyy"
 plugins=(
   alias-finder
   composer
+  compleat
   fzf
   git
   git-auto-fetch
