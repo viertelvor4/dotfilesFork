@@ -64,6 +64,7 @@ apt_packages+=(
   sass
   firefox 
   language-pack-de-base
+  fzf
 )
 
 apt_packages+=(vim)
@@ -200,10 +201,8 @@ if is_ubuntu_desktop; then
   ################
   
   # Install libre office
-  if [[ ! -d "$HOME/snap/libreoffice" ]]; then
-    e_header "Installing Libre Office"
-    sudo snap install libreoffice
-  fi
+  e_header "Installing Libre Office"
+  sudo snap install libreoffice
   
   # Install slack
   if [[ ! -d "/usr/bin/slack" ]]; then

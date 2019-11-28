@@ -72,14 +72,12 @@ HIST_STAMPS="mm/dd/yyyy"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   alias-finder
-  autojump
   composer
   fzf
   git
   git-auto-fetch
   git-extras
   colored-man-pages
-  autojump	# j to jump - jc to jump to a child of the current folder
   command-not-found
   colorize
   copydir	# use copydir to copy pwd
