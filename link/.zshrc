@@ -18,6 +18,9 @@ ZSH_THEME="powerlevel9k/powerlevel9k"
  # default user to hide user, when logged in to the local machine
 export DEFAULT_USER=althof
 
+# make fzf work
+export FZF_BASE="$HOME/.fzf.zsh"
+
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
@@ -157,3 +160,5 @@ zle -N zle-keymap-select
 
 # function for cd with ls in combination 
 function cd() { builtin cd "$@" && ls -lahn; }
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

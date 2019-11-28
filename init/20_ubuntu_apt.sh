@@ -64,7 +64,6 @@ apt_packages+=(
   sass
   firefox 
   language-pack-de-base
-  fzf
 )
 
 apt_packages+=(vim)
@@ -195,6 +194,10 @@ if is_ubuntu_desktop; then
     echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | sudo debconf-set-selections
     echo http://ftp.debian.org/debian/pool/contrib/m/msttcorefonts/ttf-mscorefonts-installer_3.6_all.deb
   }
+
+  # fzf: https://github.com/junegunn/fzf#using-git 
+  git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+  ~/.fzf/install --all
 
   ################
   # various apps #
