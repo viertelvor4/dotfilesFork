@@ -26,6 +26,26 @@ function add_ppa() {
 # Misc.
 apt_packages+=(
   curl
+  php
+  php-pear 
+  php-fpm 
+  php-dev 
+  php-zip 
+  php-curl 
+  php-xmlrpc 
+  php-gd 
+  php-mysql 
+  php-mbstring 
+  php-xml 
+  libapache2-mod-php
+  php-bcmath
+  php-ctype
+  php-json
+  php-mbstring
+  php-openssl
+  php-pdo
+  php-tokenizer
+  apache2
   git-core
   htop
   jq
