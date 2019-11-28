@@ -42,7 +42,6 @@ apt_packages+=(
   php-ctype
   php-json
   php-mbstring
-  php-openssl
   php-pdo
   php-tokenizer
   apache2
@@ -99,26 +98,32 @@ if is_ubuntu_desktop; then
   apt_packages+=(adapta-gtk-theme)
 
   # https://www.omgubuntu.co.uk/2019/06/install-qogir-theme-ubuntu
-  git clone https://github.com/vinceliuice/Qogir-theme.git $installers_path/Qogir-theme
-  cd $installers_path/Qogir-theme
-  ./install.sh
-  cd ..
-  rm -rf Qogir-theme
+  if [[ ! -d "$installers_path/Qogir-theme" ]]; then
+    git clone https://github.com/vinceliuice/Qogir-theme.git $installers_path/Qogir-theme
+    cd $installers_path/Qogir-theme
+    ./install.sh
+    # cd ..
+    # rm -rf Qogir-theme
+  fi
 
   # https://github.com/vinceliuice/vimix-gtk-themes
-  git clone https://github.com/vinceliuice/vimix-gtk-themes.git $installers_path/Vimix-themes
-  cd $installers_path/Vimix-themes
-  ./Install
-  cd ..
-  rm -rf Vimix-themes
+  if [[ ! -d "$installers_path/Vimix-themes" ]]; then
+    git clone https://github.com/vinceliuice/vimix-gtk-themes.git $installers_path/Vimix-themes
+    cd $installers_path/Vimix-themes
+    ./Install
+    # cd ..
+    # rm -rf Vimix-themes
+  fi
 
   # https://github.com/vinceliuice/vimix-icon-theme
-  cd $installers_path
-  git clone https://github.com/vinceliuice/vimix-icon-theme.git $installers_path/vimix-icon-themes
-  cd $installers_path/vimix-icon-themes
-  ./install.sh
-  cd ..
-  rm -rf vimix-icon-themes
+  if [[ ! -d "$installers_path/vimix-icon-themes" ]]; then
+    cd $installers_path
+    git clone https://github.com/vinceliuice/vimix-icon-theme.git $installers_path/vimix-icon-themes
+    cd $installers_path/vimix-icon-themes
+    ./install.sh
+    # cd ..
+    # rm -rf vimix-icon-themes
+  fi
 
   # https://www.ubuntuupdates.org/ppa/google_chrome
   apt_keys+=(https://dl-ssl.google.com/linux/linux_signing_key.pub)
@@ -193,6 +198,12 @@ if is_ubuntu_desktop; then
   ################
   # various apps #
   ################
+  
+  # Install libre office
+  if [[ ! -d "$HOME/snap/libreoffice" ]]; then
+    e_header "Installing Libre Office"
+    sudo snap install libreoffice
+  fi
   
   # Install slack
   if [[ ! -d "/usr/bin/slack" ]]; then
