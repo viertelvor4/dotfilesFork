@@ -245,15 +245,6 @@ if is_ubuntu_desktop; then
 fi
 
 function other_stuff() {
-  # Install Git Extras
-  if [[ ! "$(type -P git-extras)" ]]; then
-    e_header "Installing Git Extras"
-    (
-      cd $DOTFILES/vendor/git-extras &&
-      sudo make install
-    )
-  fi
-  
   # Install Dash-To-Panel
   e_header "Installing Dash-to-Panel"
   git clone https://github.com/home-sweet-gnome/dash-to-panel.git $DOTFILES/caches/installers/panel
