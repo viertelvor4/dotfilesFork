@@ -15,7 +15,6 @@ gsettings set org.gnome.desktop.wm.preferences action-middle-click-titlebar 'low
 gsettings set org.gnome.desktop.wm.preferences resize-with-right-button false
 gsettings set org.gnome.desktop.wm.preferences action-right-click-titlebar 'menu'
 gsettings set org.gnome.desktop.wm.preferences action-double-click-titlebar 'toggle-maximize'
-gsettings set org.gnome.desktop.wm.preferences workspace-names @as []
 gsettings set org.gnome.desktop.wm.preferences visual-bell-type 'fullscreen-flash'
 gsettings set org.gnome.desktop.wm.preferences focus-mode 'click'
 gsettings set org.gnome.desktop.wm.preferences button-layout ':appmenu,minimize,maximize,close'
@@ -96,7 +95,6 @@ gsettings set org.gnome.login-screen enable-password-authentication true
 gsettings set org.gnome.mutter overlay-key 'Super_L'
 gsettings set org.gnome.mutter focus-change-on-pointer-rest true
 gsettings set org.gnome.mutter draggable-border-width 10
-gsettings set org.gnome.mutter experimental-features @as []
 gsettings set org.gnome.mutter dynamic-workspaces false
 gsettings set org.gnome.mutter center-new-windows false
 gsettings set org.gnome.mutter auto-maximize true
@@ -104,8 +102,6 @@ gsettings set org.gnome.mutter attach-modal-dialogs true
 gsettings set org.gnome.mutter edge-tiling true
 gsettings set org.gnome.mutter workspaces-only-on-primary false
 gsettings set org.gnome.mutter no-tab-popup false
-gsettings set org.gnome.mutter.keybindings tab-popup-cancel @as []
-gsettings set org.gnome.mutter.keybindings tab-popup-select @as []
 gsettings set org.gnome.mutter.keybindings toggle-tiled-right ['<Super>Right']
 gsettings set org.gnome.mutter.keybindings toggle-tiled-left ['<Super>Left']
 gsettings set org.gnome.mutter.keybindings rotate-monitor ['XF86RotateWindows']

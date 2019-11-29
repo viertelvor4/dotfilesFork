@@ -64,6 +64,7 @@ apt_packages+=(
   sass
   firefox 
   language-pack-de-base
+  pandoc
 )
 
 apt_packages+=(vim)
@@ -99,6 +100,7 @@ if is_ubuntu_desktop; then
 
   # https://www.omgubuntu.co.uk/2019/06/install-qogir-theme-ubuntu
   if [[ ! -d "$installers_path/Qogir-theme" ]]; then
+    e_header "Installing Qogir theme"
     git clone https://github.com/vinceliuice/Qogir-theme.git $installers_path/Qogir-theme
     cd $installers_path/Qogir-theme
     ./install.sh
@@ -108,6 +110,7 @@ if is_ubuntu_desktop; then
 
   # https://github.com/vinceliuice/vimix-gtk-themes
   if [[ ! -d "$installers_path/Vimix-themes" ]]; then
+    e_header "Installing Vimix theme"
     git clone https://github.com/vinceliuice/vimix-gtk-themes.git $installers_path/Vimix-themes
     cd $installers_path/Vimix-themes
     ./Install
@@ -117,6 +120,7 @@ if is_ubuntu_desktop; then
 
   # https://github.com/vinceliuice/vimix-icon-theme
   if [[ ! -d "$installers_path/vimix-icon-themes" ]]; then
+    e_header "Installing Vimix icons"
     cd $installers_path
     git clone https://github.com/vinceliuice/vimix-icon-theme.git $installers_path/vimix-icon-themes
     cd $installers_path/vimix-icon-themes
@@ -187,7 +191,7 @@ if is_ubuntu_desktop; then
   # deb_sources+=("https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2019.02.14_amd64.deb")
 
   # Franz Messanger
-  deb_installed+=(/opt/franz)
+  deb_installed+=(/opt/Franz)
   deb_sources+=("https://github.com/meetfranz/franz/releases/download/v5.4.0/franz_5.4.0_amd64.deb")
   
   # http://askubuntu.com/a/852727
@@ -200,6 +204,7 @@ if is_ubuntu_desktop; then
   }
 
   # fzf: https://github.com/junegunn/fzf#using-git 
+  e_header "Installing fzf"
   git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
   ~/.fzf/install --all
 
