@@ -186,6 +186,10 @@ if is_ubuntu_desktop; then
   # deb_installed+=(/usr/bin/dropbox)
   # deb_sources+=("https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2019.02.14_amd64.deb")
 
+  # Franz Messanger
+  deb_installed+=(/opt/franz)
+  deb_sources+=("https://github.com/meetfranz/franz/releases/download/v5.4.0/franz_5.4.0_amd64.deb")
+  
   # http://askubuntu.com/a/852727
   apt_packages+=(cabextract)
   deb_installed+=(/usr/share/fonts/truetype/msttcorefonts)
@@ -208,16 +212,12 @@ if is_ubuntu_desktop; then
   sudo snap install libreoffice
   
   # Install slack
-  if [[ ! -d "/usr/bin/slack" ]]; then
-    e_header "Installing Slack"
-    sudo snap install slack --classic
-  fi
+  e_header "Installing Slack"
+  sudo snap install slack --classic
   
   # Install Spotify
-  if [[ ! -d "$HOME/snap/spotify" ]]; then
-    e_header "Installing Spotify"
-    sudo snap install spotify
-  fi
+  e_header "Installing Spotify"
+  sudo snap install spotify
 
   # Install Dropbox
   # Führen Sie den Dropbox-Daemon danach von dem neuen .dropbox-dist -Ordner aus aus.
@@ -238,12 +238,12 @@ if is_ubuntu_desktop; then
   
   # Franz Messanger
   # cd into the dir and start Franz with ./Franz
-  if [[ ! -d "/opt/franz" ]]; then
-    e_header "Installing Franz Messanger"
-    sudo mkdir -p /opt/franz &&
-    cd /opt/franz &&
-    wget -O - "https://github.com/meetfranz/franz/releases/download/v5.4.0/franz_5.4.0_amd64.deb" 
-  fi
+  # if [[ ! -d "/opt/franz" ]]; then
+    # e_header "Installing Franz Messanger"
+    # sudo mkdir -p /opt/franz &&
+    # cd /opt/franz &&
+    # wget -O - "https://github.com/meetfranz/franz/releases/download/v5.4.0/franz_5.4.0_amd64.deb"
+  # fi
 fi
 
 function other_stuff() {
