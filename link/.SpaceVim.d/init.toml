@@ -151,8 +151,8 @@
   show_cursor_error = false
 
 [[layers]]
-  name = "debug"
+  name = "markdown"
 
 [[custom_plugins]]
-    name = 'vim-vdebug/vdebug'
+    name = 'vimwiki/vimwiki'
     merged = false
