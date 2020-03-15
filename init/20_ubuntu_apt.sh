@@ -159,7 +159,7 @@ if is_ubuntu_desktop; then
   # https://www.digitalocean.com/community/tutorials/so-installieren-und-verwenden-sie-docker-auf-ubuntu-18-04-de
   e_header "Adding key for docker"
   curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-  apt_source_texts+=("deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable")
+  apt_source_texts+=("deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable")
   apt_packages+=(docker-ce)
 
   # Misc
