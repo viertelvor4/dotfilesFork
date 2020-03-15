@@ -65,6 +65,10 @@ apt_packages+=(
   firefox 
   language-pack-de-base
   pandoc
+  # for docker
+  apt-transport-https 
+  ca-certificates
+  software-properties-common
 )
 
 apt_packages+=(vim)
@@ -78,6 +82,11 @@ apt_packages+=(neovim)
 add_ppa ppa:greymd/tmux-xpanes
 apt_packages+=(tmux-xpanes)
 
+# https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-ansible-on-ubuntu-18-04
+add_ppa ppa:ansible/ansible
+apt_packages+=(ansible)
+
+# JUST STUFF FOR DESKTOP
 if is_ubuntu_desktop; then
   # http://www.omgubuntu.co.uk/2016/06/install-latest-arc-gtk-theme-ubuntu-16-04
   # apt_keys+=(http://download.opensuse.org/repositories/home:Horst3180/xUbuntu_16.04/Release.key)
@@ -146,6 +155,12 @@ if is_ubuntu_desktop; then
   apt_source_files+=(virtualbox)
   apt_source_texts+=("deb [arch=amd64] http://download.virtualbox.org/virtualbox/debian $(lsb_release -cs) contrib")
   apt_packages+=(virtualbox-6.0)
+
+  # https://www.digitalocean.com/community/tutorials/so-installieren-und-verwenden-sie-docker-auf-ubuntu-18-04-de
+  e_header "Adding key for docker"
+  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+  apt_source_texts+=("deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable")
+  apt_packages+=(docker-ce)
 
   # Misc
   apt_packages+=(
