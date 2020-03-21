@@ -138,6 +138,18 @@ if is_ubuntu_desktop; then
     # rm -rf vimix-icon-themes
   fi
 
+  # Jetbrains fonts https://www.jetbrains.com/lp/mono/#how-to-install
+  if [[ ! -d "$installers_path/jetbrains_fonts" ]]; then
+    e_header "Installing Jetbrains Fonts"
+    cd $installers_path
+    mkdir jetbrains_fonts
+    cd $installers_path/jetbrains_fonts
+    wget "https://github.com/JetBrains/JetBrainsMono/releases/download/v1.0.4/JetBrainsMono-1.0.4.zip" -O "jetbrains_mono.zip" && sudo unzip jetbrains_mono.zip -d /usr/share/fonts
+    fc-cache -f -v
+    # cd ..
+    # rm -rf jetbrains_fonts
+  fi
+  
   # https://www.ubuntuupdates.org/ppa/google_chrome
   apt_keys+=(https://dl-ssl.google.com/linux/linux_signing_key.pub)
   apt_source_files+=(google-chrome)
