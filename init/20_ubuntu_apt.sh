@@ -89,6 +89,9 @@ apt_packages+=(ansible)
 # installing composer https://getcomposer.org/doc/faqs/how-to-install-composer-programmatically.md
   if [[ ! -d "$installers_path/composer" ]]; then
     e_header "Installing composer"
+    cd $installers_path
+    mkdir composer
+    cd $installers_path/composer
 
     EXPECTED_CHECKSUM="$(wget -q -O - https://composer.github.io/installer.sig)"
     php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
@@ -100,15 +103,15 @@ apt_packages+=(ansible)
     rm composer-setup.php
     exit 1
     fi
-
+    e_header "--> download successful - installing"
     php composer-setup.php --quiet
     RESULT=$?
     rm composer-setup.php
-    exit $RESULT
     #making composer availabe globally
     sudo mv composer.phar /usr/local/bin/composer
     # cd ..
     # rm -rf composer
+    exit $RESULT
   fi
   
 # JUST STUFF FOR DESKTOP
