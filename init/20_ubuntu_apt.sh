@@ -86,6 +86,31 @@ apt_packages+=(tmux-xpanes)
 add_ppa ppa:ansible/ansible
 apt_packages+=(ansible)
 
+# installing composer https://getcomposer.org/doc/faqs/how-to-install-composer-programmatically.md
+  if [[ ! -d "$installers_path/composer" ]]; then
+    e_header "Installing composer"
+
+    EXPECTED_CHECKSUM="$(wget -q -O - https://composer.github.io/installer.sig)"
+    php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+    ACTUAL_CHECKSUM="$(php -r "echo hash_file('sha384', 'composer-setup.php');")"
+
+    if [ "$EXPECTED_CHECKSUM" != "$ACTUAL_CHECKSUM" ]
+    then
+    >&2 echo 'ERROR: Invalid installer checksum'
+    rm composer-setup.php
+    exit 1
+    fi
+
+    php composer-setup.php --quiet
+    RESULT=$?
+    rm composer-setup.php
+    exit $RESULT
+    #making composer availabe globally
+    sudo mv composer.phar /usr/local/bin/composer
+    # cd ..
+    # rm -rf composer
+  fi
+  
 # JUST STUFF FOR DESKTOP
 if is_ubuntu_desktop; then
   # http://www.omgubuntu.co.uk/2016/06/install-latest-arc-gtk-theme-ubuntu-16-04
