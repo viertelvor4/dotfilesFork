@@ -9,6 +9,10 @@ deb_installed=()
 deb_sources=()
 
 installers_path="$DOTFILES/caches/installers"
+if [[ ! -d "$installers_path" ]]; then
+  cd $DOTFILES/caches
+  mkdir installers
+fi
 
 # Ubuntu distro release name, eg. "xenial"
 release_name=$(lsb_release -c | awk '{print $2}')
@@ -86,34 +90,6 @@ apt_packages+=(tmux-xpanes)
 add_ppa ppa:ansible/ansible
 apt_packages+=(ansible)
 
-# installing composer https://getcomposer.org/doc/faqs/how-to-install-composer-programmatically.md
-  if [[ ! -d "$installers_path/composer" ]]; then
-    e_header "Installing composer"
-    cd $installers_path
-    mkdir composer
-    cd $installers_path/composer
-
-    EXPECTED_CHECKSUM="$(wget -q -O - https://composer.github.io/installer.sig)"
-    php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-    ACTUAL_CHECKSUM="$(php -r "echo hash_file('sha384', 'composer-setup.php');")"
-
-    if [ "$EXPECTED_CHECKSUM" != "$ACTUAL_CHECKSUM" ]
-    then
-    >&2 echo 'ERROR: Invalid installer checksum'
-    rm composer-setup.php
-    exit 1
-    fi
-    e_header "--> download successful - installing"
-    php composer-setup.php --quiet
-    RESULT=$?
-    rm composer-setup.php
-    #making composer availabe globally
-    sudo mv composer.phar /usr/local/bin/composer
-    # cd ..
-    # rm -rf composer
-    exit $RESULT
-  fi
-  
 # JUST STUFF FOR DESKTOP
 if is_ubuntu_desktop; then
   # http://www.omgubuntu.co.uk/2016/06/install-latest-arc-gtk-theme-ubuntu-16-04
@@ -193,7 +169,7 @@ if is_ubuntu_desktop; then
   apt_keys+=(https://www.virtualbox.org/download/oracle_vbox_2016.asc)
   apt_source_files+=(virtualbox)
   apt_source_texts+=("deb [arch=amd64] http://download.virtualbox.org/virtualbox/debian $(lsb_release -cs) contrib")
-  apt_packages+=(virtualbox-6.0)
+  apt_packages+=(virtualbox-6.1)
 
   # https://www.digitalocean.com/community/tutorials/so-installieren-und-verwenden-sie-docker-auf-ubuntu-18-04-de
   e_header "Adding key for docker"
@@ -212,7 +188,6 @@ if is_ubuntu_desktop; then
     network-manager-openconnect
     network-manager-openconnect-gnome
     openssh-server
-    unity-tweak-tool
     xclip
     zenmap
     keepassxc
@@ -315,6 +290,35 @@ function other_stuff() {
     # rm -rf dash-to-panel
     gnome-shell-extension-tool -e dash-to-panel
   fi
+
+  # installing composer https://getcomposer.org/doc/faqs/how-to-install-composer-programmatically.md
+  if [[ ! -d "$installers_path/composer" ]]; then
+    e_header "Installing composer"
+    cd $installers_path
+    sudo mkdir composer
+    cd $installers_path/composer
+
+    EXPECTED_CHECKSUM="$(wget -q -O - https://composer.github.io/installer.sig)"
+    php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+    ACTUAL_CHECKSUM="$(php -r "echo hash_file('sha384', 'composer-setup.php');")"
+
+    if [ "$EXPECTED_CHECKSUM" != "$ACTUAL_CHECKSUM" ]
+    then
+    >&2 echo 'ERROR: Invalid installer checksum'
+    rm composer-setup.php
+    exit 1
+    fi
+    e_header "--> download successful - installing"
+    php composer-setup.php --quiet
+    RESULT=$?
+    rm composer-setup.php
+    #making composer availabe globally
+    sudo mv composer.phar /usr/local/bin/composer
+    # cd ..
+    # rm -rf composer
+    exit $RESULT
+  fi
+  
 }
 
 ####################
